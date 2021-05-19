@@ -1,0 +1,91 @@
+﻿<!doctype html>
+<html lang="en"> 
+
+  <head> 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head> 
+ 
+  <body> 
+    <nav class="navbar navbar-default">
+     	<div class="container-fluid">
+        <ul class="nav navbar-nav">
+          <li><a href="welcome.html"><b>Home</b></a></li>
+          <li><a href="contacts.html"><b>Contacts</b></a></li>
+          <li><a href="stock.html"><b>Stock Page</b></a></li>
+        </ul>
+    	</div>
+  	</nav>
+    <br><br>
+
+    <div class="container">
+      <div class="row">
+        <p><br /></p>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          <div class="panel panel-default">
+            <form id ="myForm" name="myForm">
+              <p></p>
+              <table class="table table-bordered table-hover">
+                <tbody>
+                  <tr>
+                    <td class="col-md-6">Username</td>
+                    <td class="col-md-6">
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="user" required>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="col-md-6">Password</td>
+                    <td class="col-md-6">
+                      <div class="form-group">
+                        <input type="password" class="form-control" id="password" required>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                      <td class="col-md-6"></td>
+                      <td class="col-md-6">
+                          <input type="submit" value="Submit">
+                      </td>
+                  </tr>
+                </tbody>
+              </table>
+            </form>
+            <div id="fail" style="display:none"> Incorrect username and password </div>
+           <script> 
+			$(document).ready(function () {
+				$('#myForm').submit(function (event) {
+						event.preventDefault();
+						let login = $('#user').val(); 
+						let password = $('#password').val();
+						$.post('/api/loginAttempt',
+							{"login": login, "password": password}, 
+							(data) => {
+								console.log(data);
+							if(data.status == 'success'){
+								window.location.href = '/contacts'; 
+							}							
+							else {
+								var error = document.getElementById("fail");
+								error.style.display = "block";
+
+							}
+						});
+					});
+			});
+		  </script>	
+          </div>
+        </div> 
+        <div class="col-md-4"></div>
+      </div> 
+    </div> 
+  </body> 
+</html> 
