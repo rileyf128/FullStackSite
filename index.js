@@ -31,12 +31,7 @@ const app = express();
 // Use express-session
 // In-memory session is sufficient for this assignment
 
-app.use(session({
-        secret: "csci4131secretkey",
-        saveUninitialized: true,
-        resave: false
-    }
-));
+
 //uncommenting the below redirects all pages to login but it breaks the login function so it will remain commented 
 /*app.use(function (req, res, next) {
 	if(req.path == '/login') {
